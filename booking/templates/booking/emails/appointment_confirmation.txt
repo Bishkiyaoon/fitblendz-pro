@@ -1,0 +1,22 @@
+Appointment Confirmation
+
+Hi {{ appointment.name }},
+
+Your appointment has been successfully booked and confirmed!
+
+Appointment Details:
+- Service: {{ service_name }}
+- Date: {{ appointment.date }}
+- Time: {{ formatted_time }}
+- Duration: {{ service_duration }}
+- Price: ${{ service_price }}
+
+Please arrive 10 minutes before your scheduled appointment time.
+
+If you need to make any changes or have questions, please contact us directly.
+
+Thank you for choosing Fitblendz!
+
+Best regards,
+The FitBlendz Team
+

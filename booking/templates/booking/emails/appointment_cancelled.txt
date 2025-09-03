@@ -1,0 +1,20 @@
+Appointment Cancelled
+
+Hi {{ appointment.name }},
+
+Your appointment has been cancelled as requested.
+
+Cancelled Appointment Details:
+- Service: {{ service_name }}
+- Date: {{ appointment.date }}
+- Time: {{ formatted_time }}
+
+To reschedule your appointment, please visit our website or contact us directly.
+
+We apologize for any inconvenience this may have caused.
+
+Thank you for your understanding.
+
+Best regards,
+The FitBlendz Team
+

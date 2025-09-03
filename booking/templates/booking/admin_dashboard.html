@@ -1,0 +1,1028 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"Admin Dashboard - FitBlendz Pro" }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Modern Dashboard Styles */
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .welcome-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: white;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: max-content;
+            width: 300px;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-label {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .search-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 1.2rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .search-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .appointments-section {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .appointments-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .appointments-table th {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 2px solid #e9ecef;
+            font-size: 1.1rem;
+        }
+        
+        .appointments-table td {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: middle;
+            font-size: 1rem;
+        }
+        
+        .appointments-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-completed {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-actions {
+            margin-top: 0.5rem;
+        }
+        
+        .status-select {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            color: #495057;
+            cursor: pointer;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            width: 100%;
+            max-width: 120px;
+        }
+        
+        .status-select:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        
+        .status-select:hover {
+            border-color: #80bdff;
+        }
+        
+        .btn-delete {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        }
+        
+        .pagination {
+            background: #f8f9fa;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .pagination .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            margin: 0 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .pagination .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .current-page {
+            font-weight: 600;
+            color: #495057;
+            font-size: 1.1rem;
+        }
+        
+        /* Notification Styles */
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 400px;
+        }
+        
+        .notification {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateX(400px);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-left: 5px solid #4CAF50;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-left-color: #2E7D32;
+        }
+        
+        .notification.error {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            border-left-color: #C62828;
+        }
+        
+        .notification.warning {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            border-left-color: #EF6C00;
+        }
+        
+        .notification::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .notification-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification-message {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .notification-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .notification-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        /* @media only screen and (max-width: 912px) {
+            .container{
+                justify-items: center;
+            }
+            .search-section{
+                width: 100%;
+            }
+        } */
+        @media only screen and (min-width: 853px) and (max-width: 912px) {
+            .container{
+                justify-items: center!important;
+            }
+            .search-section{
+                width: 100%!important ;
+            }
+        }
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+        
+            .search-btn{
+                justify-content: center!important;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .search-form {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .search-input {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .search-btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .appointments-section {
+                overflow: visible;
+            }
+            
+            .appointments-table {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            .appointments-table th,
+            .appointments-table td {
+                padding: 0.8rem 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .status-badge {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+            }
+            
+            .btn-delete {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .stat-card {
+                padding: 1.5rem;
+                width: 100%;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .stat-label {
+                font-size: 1.1rem;
+            }
+            
+            .search-section {
+                padding: 1rem;
+            }
+            
+            .appointments-section {
+                overflow: visible;
+            }
+            
+            .appointments-table {
+                min-width: auto;
+                width: 100%;
+                font-size: 0.8rem;
+            }
+            
+            .appointments-table th,
+            .appointments-table td {
+                padding: 0.6rem 0.3rem;
+                font-size: 0.8rem;
+            }
+            
+            .status-badge {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.5rem;
+            }
+            
+            .btn-delete {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.75rem;
+            }
+            
+            /* Stack table cells vertically on very small screens */
+            .appointments-table thead {
+                display: none;
+            }
+            
+            .appointments-table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid #e9ecef;
+                border-radius: 8px;
+                padding: 1rem;
+                background: white;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            
+            .appointments-table tbody td {
+                display: block;
+                text-align: left;
+                padding: 0.8rem 0;
+                border: none;
+                border-bottom: 1px solid #f0f0f0;
+                position: relative;
+            }
+            
+            .appointments-table tbody td:last-child {
+                border-bottom: none;
+            }
+            
+            .appointments-table tbody td:before {
+                content: attr(data-label) ": ";
+                font-weight: 600;
+                color: #495057;
+                min-width: 100px;
+                display: inline-block;
+                margin-right: 0.5rem;
+            }
+            .btn-primary{
+                margin-left: 0px!important;
+                margin-top: 30px!important;
+            }
+            .search-btn{
+                justify-content: center!important;
+            }
+            
+            /* Mobile-specific status styling */
+            .status-actions {
+                margin-top: 1rem;
+            }
+            
+            .status-select {
+                width: 100%;
+                max-width: none;
+                padding: 0.5rem;
+                font-size: 1rem;
+            }
+            
+            /* Mobile action buttons */
+            .action-buttons {
+                margin-top: 1rem;
+            }
+            
+            .btn-delete {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            /* Mobile header adjustments */
+            .section-header {
+                padding: 1rem;
+                font-size: 1.1rem;
+            }
+            
+            .btn-refresh {
+                float: none !important;
+                width: 100%;
+                margin: 0.5rem 0;
+                padding: 0.8rem;
+            }
+            
+            .auto-refresh-info {
+                float: none !important;
+                text-align: center;
+                margin-top: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.8rem;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .container {
+                padding: 0.8rem;
+                margin: 0.5rem;
+            }
+            
+            .stat-card {
+                padding: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .stat-label {
+                font-size: 1rem;
+            }
+            
+            .search-section {
+                padding: 0.8rem;
+            }
+            
+            .appointments-table tbody td {
+                font-size: 0.8rem;
+                padding: 0.6rem 0;
+            }
+            
+            .appointments-table tbody td:before {
+                min-width: 80px;
+                font-size: 0.75rem;
+            }
+            
+            .status-badge {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.5rem;
+                display: inline-block;
+                margin-bottom: 0.5rem;
+            }
+            .btn-primary{
+                margin-left: 0px!important;
+                margin-top: 30px!important;
+            }
+            .search-btn{
+                justify-content: center!important;
+            }
+            .btn-delete {
+                padding: 0.4rem 0.7rem;
+                font-size: 0.75rem;
+            }
+            
+            .status-select {
+                font-size: 0.9rem;
+                padding: 0.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="container-fluid">
+            <h1><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h1>
+            <div class="user-info">
+                <div class="welcome-text">
+                    Welcome back, {{ request.user.username }}! 👋
+                </div>
+                <a href="{% url 'booking:admin_logout' %}" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <!-- Statistics Cards -->
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">{{ total_appointments }}</div>
+                    <div class="stat-label">Total Appointments</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">{{ pending_appointments }}</div>
+                    <div class="stat-label">Pending</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">{{ confirmed_appointments }}</div>
+                    <div class="stat-label">Confirmed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">{{ today_appointments }}</div>
+                    <div class="stat-label">Today</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="container">
+            <div class="search-section">
+                <h4><i class="fas fa-search"></i> Filter Appointments</h4>
+                <form method="GET" class="search-form">
+                    <select name="status" class="search-input">
+                        <option value="">All Statuses</option>
+                        <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>Pending</option>
+                        <option value="confirmed" {% if status_filter == 'confirmed' %}selected{% endif %}>Confirmed</option>
+                        <option value="completed" {% if status_filter == 'completed' %}selected{% endif %}>Completed</option>
+                        <option value="cancelled" {% if status_filter == 'cancelled' %}selected{% endif %}>Cancelled</option>
+                    </select>
+                    <input type="date" name="date" class="search-input" value="{{ date_filter }}" placeholder="Filter by date">
+                    <select name="service" class="search-input">
+                        <option value="">All Services</option>
+                        {% for service in services %}
+                        <option value="{{ service.id }}" {% if service_filter == service.id|stringformat:"s" %}selected{% endif %}>{{ service.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                    <a href="{% url 'booking:admin_dashboard' %}" class="search-btn" style="text-decoration: none; display: inline-flex; align-items: center;">
+                        <i class="fas fa-times"></i> Clear
+                    </a>
+                </form>
+            </div>
+        </div>
+
+        <!-- Appointments Section -->
+        <div class="container">
+            <div class="appointments-section">
+                <div class="section-header">
+                    <i class="fas fa-calendar-check"></i> Appointments ({{ page_obj|length }} found)
+                    <button class="btn btn-primary btn-refresh" onclick="refreshDashboard()" style="float: right; margin-left: 10px;">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <div class="auto-refresh-info" style="float: right; color: #6c757d; font-size: 0.9rem; margin-top: 5px;">
+                        Auto-refresh every 30s
+                    </div>
+                </div>
+                
+                {% if page_obj %}
+                <div class="table-responsive">
+                    <table class="appointments-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Service</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for appointment in page_obj %}
+                            <tr>
+                                <td data-label="ID">#{{ appointment.id }}</td>
+                                <td data-label="Customer">{{ appointment.name }}</td>
+                                <td data-label="Service">{{ appointment.service.name }}</td>
+                                <td data-label="Date">{{ appointment.date|date:"M d, Y" }}</td>
+                                <td data-label="Time">{{ appointment.time|time:"g:i A" }}</td>
+                                <td data-label="Phone">{{ appointment.phone }}</td>
+                                <td data-label="Email">{{ appointment.email }}</td>
+                                <td data-label="Status">
+                                    <span class="status-badge status-{{ appointment.status }}">
+                                        {{ appointment.get_status_display }}
+                                    </span>
+                                    <div class="status-actions">
+                                        <select class="status-select" onchange="updateAppointmentStatus('{{ appointment.appointment_id }}', this.value, this)">
+                                            <option value="">Change Status</option>
+                                            <option value="pending" {% if appointment.status == 'pending' %}selected{% endif %}>Pending</option>
+                                            <option value="confirmed" {% if appointment.status == 'confirmed' %}selected{% endif %}>Confirmed</option>
+                                            <option value="completed" {% if appointment.status == 'completed' %}selected{% endif %}>Completed</option>
+                                            <option value="cancelled" {% if appointment.status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td data-label="Actions">
+                                    <div class="action-buttons">
+                                        <button class="btn btn-danger btn-delete" onclick="deleteAppointment('{{ appointment.appointment_id }}')">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                {% if page_obj.has_other_pages %}
+                <div class="pagination">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}{% if status_filter %}&status={{ status_filter }}{% endif %}{% if date_filter %}&date={{ date_filter }}{% endif %}{% if service_filter %}&service={{ service_filter }}{% endif %}" class="btn">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </a>
+                    {% endif %}
+                    
+                    <span class="current-page">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    </span>
+                    
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}{% if status_filter %}&status={{ status_filter }}{% endif %}{% if date_filter %}&date={{ date_filter }}{% endif %}{% if service_filter %}&service={{ service_filter }}{% endif %}" class="btn">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+                
+                {% else %}
+                <div class="text-center p-4">
+                    <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">No appointments found</h4>
+                    <p class="text-muted">Try adjusting your filters or check back later.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- CSRF Token -->
+    {% csrf_token %}
+
+    <script>
+        // Notification function
+        function showNotification(title, message, type = 'info', duration = 5000) {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            notification.innerHTML = `
+                <button class="notification-close" onclick="this.parentElement.remove()">×</button>
+                <div class="notification-title">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    ${title}
+                </div>
+                <div class="notification-message">${message}</div>
+            `;
+            
+            container.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Auto-hide after duration
+            if (duration > 0) {
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        if (notification.parentElement) {
+                            notification.remove();
+                        }
+                    }, 500);
+                }, duration);
+            }
+        }
+        
+        function deleteAppointment(appointmentId) {
+            // Show loading notification
+            showNotification('Deleting Appointment', 'Removing appointment from database...', 'warning', 0);
+            
+            // Get CSRF token
+            const csrfElement = document.querySelector('[name=csrfmiddlewaretoken]');
+            if (!csrfElement) {
+                showNotification('Error', 'CSRF token not found. Please refresh the page.', 'error');
+                return;
+            }
+            
+            const csrfToken = csrfElement.value;
+            console.log('Deleting appointment:', appointmentId);
+            
+            fetch(`/api/delete-appointment/${appointmentId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrfToken
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                                         // Remove the row from the table immediately without page refresh
+                     const rows = document.querySelectorAll('tbody tr');
+                     for (let row of rows) {
+                         const deleteButton = row.querySelector('.btn-delete');
+                         if (deleteButton && deleteButton.getAttribute('onclick').includes(appointmentId)) {
+                             row.remove();
+                             break;
+                         }
+                     }
+                    
+                    // Update the appointment count
+                    const countElement = document.querySelector('.section-header');
+                    if (countElement) {
+                        const currentCount = parseInt(countElement.textContent.match(/\d+/)[0]);
+                        countElement.textContent = `Appointments (${currentCount - 1} found)`;
+                    }
+                    
+                    showNotification('Deleted!', 'Appointment has been removed successfully', 'success');
+                } else {
+                    showNotification('Error', data.error || 'Failed to delete appointment', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Error', 'Failed to delete appointment. Please try again.', 'error');
+            });
+        }
+        
+        // Auto-refresh functionality
+        let autoRefreshInterval;
+        
+        function startAutoRefresh() {
+            autoRefreshInterval = setInterval(() => {
+                refreshDashboard();
+            }, 30000); // Refresh every 30 seconds
+        }
+        
+        function stopAutoRefresh() {
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+            }
+        }
+        
+        function refreshDashboard() {
+            // Show refresh notification
+            showNotification('Refreshing', 'Updating appointment data...', 'info', 2000);
+            
+            // Reload the page
+            location.reload();
+        }
+        
+        // Start auto-refresh when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            startAutoRefresh();
+        });
+        
+        // Stop auto-refresh when page is hidden
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                stopAutoRefresh();
+            } else {
+                startAutoRefresh();
+            }
+        });
+        
+        function updateAppointmentStatus(appointmentId, newStatus, selectElement) {
+            if (!newStatus) return; // Don't do anything if no status selected
+            
+            // Show loading notification
+            showNotification('Updating Status', 'Changing appointment status...', 'info', 0);
+            
+            // Get CSRF token
+            const csrfElement = document.querySelector('[name=csrfmiddlewaretoken]');
+            if (!csrfElement) {
+                showNotification('Error', 'CSRF token not found. Please refresh the page.', 'error');
+                return;
+            }
+            
+            const csrfToken = csrfElement.value;
+            console.log('Updating status for appointment:', appointmentId, 'to', newStatus);
+            
+            fetch(`/api/update-appointment-status/${appointmentId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrfToken
+                },
+                body: `status=${newStatus}`
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    showNotification('Status Updated!', `Appointment status changed to ${data.new_status_display}`, 'success');
+                    
+                    // Reset the select dropdown
+                    if (selectElement) {
+                        selectElement.value = '';
+                    }
+                    
+                    // Refresh the page to show updated data
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
+                } else {
+                    showNotification('Error', data.error || 'Failed to update status', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Error', 'Failed to update status. Please try again.', 'error');
+            });
+        }
+    </script>
+</body>
+</html>

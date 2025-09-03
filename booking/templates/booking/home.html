@@ -1,0 +1,314 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FitBlendz{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:,">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <header>
+    <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary fixed-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'booking:home' %}" style="font-size: 25px;">FitBlendz</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'booking:home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'booking:home' %}#Services">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'booking:home' %}#MyWork">MyWork</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'booking:home' %}#About">About</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <button class="btn1 " type="button">
+          <a href="{% url 'booking:booking_page' %}" class="text-decoration-none">
+           <span class="text">Book Now</span>
+          </a>
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
+</header>
+<main>
+{% block content %}
+<div class="home" id="Home" style ="background-image:url('{% static 'images/home.jpg' %}');background-repeat:no-repeat;background-size:cover">
+  <h1>Premimum<span class="home-head"><br>Barbershop</span><br>Experience</h1>
+    <p class="subhead">Where traditional craftsmanship meets modern style. Book</p>
+      <p class="subhead1">your appointment for the ultimate grooming experience.</p>
+      <p class="combined-line">Where traditional craftsmanship meets modern style. Book your appointment for the ultimate grooming experience.</p>
+<div class="visit">
+   <button class="btn2 " type="button">
+    <a href="{% url 'booking:booking_page' %}" class="text-decoration-none">
+          <span class="text"><i class="fa-solid fa-calendar-week"></i>  Book Appointment</span>
+    </a>
+        </button>
+        <button class="cta" id="visit-btn">
+  <span class="hover-underline-animation"> visit us</span>
+  <svg
+    id="arrow-horizontal"
+    xmlns="http://www.w3.org/2000/svg"
+    width="30"
+    height="10"
+    viewBox="0 0 46 16"
+  >
+    <path
+      id="Path_10"
+      data-name="Path 10"
+      d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+      transform="translate(30)"
+    ></path>
+  </svg>
+</button>
+</div>
+
+<div class="dlo d-flex justify-content-center align-items-center flex-wrap gap-6">
+  <div class="d-flex align-items-center gap-2">
+    <i class="fa-regular fa-clock" style="color: #FFD43B;"></i>
+    <span class="timeing">MON-SAT: 9AM - 8PM</span>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <i class="fa-regular fa-map" style="color: #FFD43B;"></i>
+    <span class="loc">Downtown Location</span>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <i class="fa-regular fa-calendar-days" style="color: #FFD43B;"></i>
+    <span class="olb">Online Booking</span>
+  </div>
+</div>
+</div>
+<div class="services" id="Services">
+  <h1 class="ser">My Services</h1>
+  <p class="shd">Experience the finest grooming services with professional skills and</p>
+  <p class="shd1">premium products</p>
+<div class="card-container">
+  <div class="card" style="text-align:left">
+  <img src="{% static 'images/card1.jpg' %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Premimum Haircuts</h5>
+    <p class="card-text">Professional styling and cutting services tailored to your unique style and preferences..</p>
+    <i class="fa-regular fa-clock"> <span class="card-icon">45 min</span></i>
+    <div class="card-contain">
+    <i class="fa-regular fa-circle-check"> <span class="card-features">Consultation</span></i>
+    <i class="fa-regular fa-circle-check"> <span class="card-features">Wash & style</span></i>
+    <i class="fa-regular fa-circle-check"> <span class="card-features">Hot Towel Finish</span></i>
+  </div>
+  <div class="btn-2">
+    <a href="{% url 'booking:booking_page' %}" class="text-decoration-none">
+  <button type="button"class="btnprimary"> Book Now</button>
+    </a>
+  </div>
+</div>
+</div>
+<div class="card" style="text-align:left">
+  <img src="{% static 'images/card2.jpg' %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Beard Grooming</h5>
+    <p class="card-text">Expert beard trimming, shaping, and conditioning for the perfect masculine look.</p>
+    <i class="fa-regular fa-clock"> <span class="card-icon">30 min</span></i>
+    <div class="card-contain">
+    <i class="fa-regular fa-circle-check"> <span class="card-features">Trimming & Shaping</span></i>
+    <i class="fa-regular fa-circle-check"> <span class="card-features">Beard Oil Treatment</span></i>
+    <i class="fa-regular fa-circle-check"> <span class="card-features">Mustache Styling</span></i>
+  </div>
+  <div class="btn-2">
+    <a href="{% url 'booking:booking_page' %}" class="text-decoration-none">
+  <button type="button"class="btnprimary">Book Now</button>
+    </a>
+  </div>
+</div>
+
+</div>
+<div class="card" style="text-align:left">
+  <img src="{% static 'images/card.jpg' %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Traditional Shave</h5>
+    <p class="card-text">Classic hot towel shave experience with premium products and traditional techniques.</p>
+    <i class="fa-regular fa-clock"> <span class="card-icon">30 min</span></i>
+    <div class="card-contain">
+    <i class="fa-regular fa-circle-check"> <span class="card-features">Hot Towel Treatment</span></i>
+    <i class="fa-regular fa-circle-check"> <span class="card-features">Premium Shaving Cream</span></i>
+    <i class="fa-regular fa-circle-check"> <span class="card-features">Aftershave & Moisturizer</span></i>
+  </div>
+<div class="btn-2">
+  <a href="{% url 'booking:booking_page' %}" class="text-decoration-none">
+  <button type="button"class="btnprimary"> Book Now</button>
+  </a>
+</div>
+</div>
+</div>
+</div>
+<div class="mywork" id="MyWork">
+<h1 class="work">Follow My Work</h1>
+<p class="work-sub">Connect with me on social media to see my latest work and styling tips</p>
+<div class="work-container">
+
+<div class="card-containers">
+  <a href="https://www.instagram.com/fit_blendz05?igsh=MWthZTU4cGhvYzh4Ng==" class="socail-link">
+  <div class="card-socail">
+  <div class="img-content">
+    <i class="fa-brands fa-instagram" style="color: #ffffff;"></i>
+  </div>
+  <div class="content">
+    <p class="heading">Follow me</p>
+    <p>
+  </div>
+</div>
+    </a>
+</div>
+<div class="card-face">
+  <div class="card-socail">
+  <div class="img-face">
+  <i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i>
+  </div>
+  <div class="content">
+    <p class="heading">Coming Soon</p>
+  </div>
+</div>
+</div>
+</div>
+<div class="ready">
+<h3 class="ready-heading">Ready to Get Your Best Look?</h3>
+<p class="ready-subheading">Follow me on social media for daily tips and book your appointment today!</p>
+</div>
+</div>
+</div>
+
+<div class="about" id="About">
+  <div class="about-me">
+    <h1 class="about-heading">Crafting Style Since 2024</h1>
+    <p class="about-subheading">
+      I combine traditional barbering techniques with modern style to deliver exceptional grooming experiences. With expertise and genuine passion for the craft, I ensure every client leaves looking and feeling their best.
+    </p>
+    <p class="about-subheading">
+      I believe that great grooming is an art form. From classic cuts to contemporary styles, I'm dedicated to helping you look sharp and feel confident.
+    </p>
+    <div class="about-about">
+    <div id="about-certified">
+    <i class="fa-solid fa-certificate" style="color: #FFD43B;font-size:30px"></i>
+    <h5 class="about-certified">Certified Barber</h5>
+    <p class="about-paragraph">Certified from Clara International</p>
+    </div>
+     <div id="about-certified">
+    <i class="fa-solid fa-person" style="color: #FFD43B;font-size:30px"></i>
+    <h5 class="about-certified">Expert Skills</h5>
+    <p class="about-paragraph">Master Craftsman</p>
+    </div>
+  </div>
+  <div id="about-about1">
+    <div id="about-certified">
+    <i class="fa-solid fa-clock" style="color: #FFD43B;font-size:30px"></i>
+    <h5 class="about-certified">Flexible Hours</h5>
+    <p class="about-paragraph">Mon-Sat Extended Hours</p>
+    </div>
+     <div id="about-certified">
+    <i class="fa-solid fa-scissors" style="color: #FFD43B;font-size:30px"></i>
+    <h5 class="about-certified">Premium Tools</h5>
+    <p class="about-paragraph">Latest Equipment</p>
+    </div>
+  </div>
+</div>
+    <div class="why-choose">
+      <h2 class="why-heading">Why Choose me ?</h2>
+      <ul>
+        <li>Personalized consultation for every client</li>
+        <li>Premium products and latest techniques</li>
+        <li>Comfortable and relaxing atmosphere</li>
+        <li>Competitive pricing with no hidden fees</li>
+        <li>Easy online booking system</li>
+      </ul>
+    </div>
+</div>
+{% endblock %}
+</main>
+<footer>
+<div class="contact">
+  <div class="contact-logo">
+    <h5 class="contact-head">FitBlendz</h5>
+    <p class="contact-sub">Expert barber crafting exceptional cuts with traditional skill and modern style.</p>
+<ul class="wrapper">
+  <li class="icon facebook">
+    <span class="tooltip">Facebook</span>
+    <svg
+      viewBox="0 0 320 512"
+      height="1.2em"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+      ></path>
+    </svg>
+  </li>
+  
+  
+  <li class="icon instagram">
+   
+    <span class="tooltip">Instagram</span>
+    <a href="https://www.instagram.com/fit_blendz05?igsh=MWthZTU4cGhvYzh4Ng==" class="contact-link" style="text-decoration: none; color: black;">   
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="1.2em"
+      fill="currentColor"
+      class="bi bi-instagram"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+      ></path>
+      
+    </svg>
+    </a>
+  </li>
+</ul>
+  </div>
+  <div class="quick">
+    <h5 class="quick-head">Quick Links</h5>
+    <ul class="quick-links">
+      <li><a class="nav-brand" href="{% url 'booking:home' %}">Home</a></li>
+      <li><a class="nav-brand" href="{% url 'booking:home' %}#Services">Services</a></li>
+      <li><a class="nav-brand" href="{% url 'booking:home' %}#MyWork">MyWork</a></li>
+      <li><a class="nav-brand" href="{% url 'booking:home' %}#About">About</a></li>      
+    </ul>
+  </div>
+  <div class="the-last">
+    <h5 class="the-head">Contact Info</h5>
+    <div class="the-icon">
+       <ul class="the-links">
+        <li>MON-SAT: 9AM - 8PM</li>
+        <li>+1 (437) 774-6501</li>
+        <li>Downtown Location</li>
+       </ul>
+    </div>
+  </div>
+</div>
+</footer>
+<script src="{% static 'js/home.js' %}"></script>
+<script src="https://kit.fontawesome.com/7ae8af30d3.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+<script>
+document.getElementById('visit-btn').addEventListener('click', function() {
+    window.location.href = '{% url "booking:booking_page" %}';
+});
+</script>
+
+</body>
+</html>

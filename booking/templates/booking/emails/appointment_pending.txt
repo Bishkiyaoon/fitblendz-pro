@@ -1,0 +1,38 @@
+Fitblendz - Appointment Request Submitted
+==============================================
+
+Dear {{ appointment.name }},
+
+Thank you for choosing Fitblendz! Your appointment request has been successfully submitted and is now pending barber approval.
+
+APPOINTMENT DETAILS:
+====================
+Service: {{ service_name }}
+Date: {{ appointment.date|date:"l, F j, Y" }}
+Time: {{ formatted_time }}
+Duration: {{ service_duration }}
+Price: ${{ service_price }}
+{% if appointment.notes %}Special Requests: {{ appointment.notes }}{% endif %}
+
+WHAT HAPPENS NEXT?
+==================
+Our barber will review your appointment request and will either:
+
+✅ APPROVE - You'll receive a confirmation email and WhatsApp notification
+❌ DECLINE - You'll receive a cancellation email with alternative suggestions
+
+This process usually takes a few minutes to a few hours.
+
+NEED TO MAKE CHANGES?
+=====================
+If you need to modify or cancel your appointment request, please contact us:
+
+Phone: +91 6239514954
+WhatsApp: +91 6239514954
+Email: bjot404@gmail.com
+
+==============================================
+Thank you for choosing Fitblendz!
+📍 Your Barbershop Address Here
+© 2024 Fitblendz. All rights reserved.
+==============================================

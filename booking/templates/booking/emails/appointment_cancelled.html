@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Appointment Cancelled</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #dc3545; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background-color: #f8f9fa; }
+        .appointment-details { background-color: white; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .footer { text-align: center; padding: 20px; color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Appointment Cancelled</h1>
+        </div>
+        
+        <div class="content">
+            <p>Hi {{ appointment.name }},</p>
+            
+            <p>Your appointment has been cancelled as requested.</p>
+            
+            <div class="appointment-details">
+                <h3>Cancelled Appointment Details:</h3>
+                <p><strong>Service:</strong> {{ service_name }}</p>
+                <p><strong>Date:</strong> {{ appointment.date }}</p>
+                <p><strong>Time:</strong> {{ formatted_time }}</p>
+            </div>
+            
+            <p>To reschedule your appointment, please visit our website or contact us directly.</p>
+            
+            <p>We apologize for any inconvenience this may have caused.</p>
+        </div>
+        
+        <div class="footer">
+            <p>Thank you for your understanding.</p>
+            <p>Best regards,<br>The FitBlendz Team</p>
+        </div>
+    </div>
+</body>
+</html>
+

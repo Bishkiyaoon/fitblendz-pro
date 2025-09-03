@@ -1,0 +1,20 @@
+Appointment Reminder
+
+Hi {{ appointment.name }},
+
+This is a friendly reminder about your upcoming appointment!
+
+Appointment Details:
+- Service: {{ service_name }}
+- Date: {{ appointment.date }}
+- Time: {{ formatted_time }}
+
+Please arrive 10 minutes before your scheduled appointment time.
+
+If you need to reschedule or cancel, please contact us as soon as possible.
+
+We look forward to seeing you!
+
+Best regards,
+The FitBlendz Team
+

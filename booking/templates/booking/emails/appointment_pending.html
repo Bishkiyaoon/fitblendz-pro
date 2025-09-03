@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Request Submitted - Fitblendz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .status-badge {
+            display: inline-block;
+            background-color: #ffc107;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .appointment-details {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .detail-value {
+            color: #212529;
+        }
+        .message {
+            background-color: #e7f3ff;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .contact-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Fitblendz</div>
+            <h1>Appointment Request Submitted</h1>
+            <div class="status-badge">⏳ PENDING APPROVAL</div>
+        </div>
+
+        <p>Dear <strong>{{ appointment.name }}</strong>,</p>
+
+        <p>Thank you for choosing Fitblendz! Your appointment request has been successfully submitted and is now pending barber approval.</p>
+
+        <div class="appointment-details">
+            <h3>📅 Appointment Details</h3>
+            <div class="detail-row">
+                <span class="detail-label">Service:</span>
+                <span class="detail-value">{{ service_name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Date:</span>
+                <span class="detail-value">{{ appointment.date|date:"l, F j, Y" }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Time:</span>
+                <span class="detail-value">{{ formatted_time }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Duration:</span>
+                <span class="detail-value">{{ service_duration }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Price:</span>
+                <span class="detail-value">${{ service_price }}</span>
+            </div>
+            {% if appointment.notes %}
+            <div class="detail-row">
+                <span class="detail-label">Special Requests:</span>
+                <span class="detail-value">{{ appointment.notes }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="message">
+            <h4>📋 What Happens Next?</h4>
+            <p>Our barber will review your appointment request and will either:</p>
+            <ul>
+                <li><strong>✅ Approve</strong> - You'll receive a confirmation email and WhatsApp notification</li>
+                <li><strong>❌ Decline</strong> - You'll receive a cancellation email with alternative suggestions</li>
+            </ul>
+            <p>This process usually takes a few minutes to a few hours.</p>
+        </div>
+
+        <div class="contact-info">
+            <h4>📞 Need to Make Changes?</h4>
+            <p>If you need to modify or cancel your appointment request, please contact us:</p>
+            <p><strong>Phone:</strong> +91 6239514954</p>
+            <p><strong>WhatsApp:</strong> +91 6239514954</p>
+            <p><strong>Email:</strong> bjot404@gmail.com</p>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for choosing Fitblendz!</p>
+            <p>📍 Your Barbershop Address Here</p>
+            <p>© 2024 Fitblendz. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

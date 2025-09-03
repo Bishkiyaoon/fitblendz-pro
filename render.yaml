@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: fitblendz-pro
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py migrate
+    startCommand: gunicorn fitblendz_pro.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: fitblendz-pro.onrender.com
+      - key: DB_NAME
+        value: fitblendz_pro
+      - key: DB_USER
+        value: fitblendz_user
+      - key: DB_PASSWORD
+        generateValue: true
+      - key: DB_HOST
+        value: dpg-xxxxxxxxx-a.oregon-postgres.render.com
+      - key: DB_PORT
+        value: 5432
+      - key: WHATSAPP_TOKEN
+        sync: false
+      - key: PHONE_NUMBER_ID
+        sync: false
+      - key: WHATSAPP_VERIFY_TOKEN
+        sync: false
+      - key: BARBER_WHATSAPP
+        sync: false
+      - key: EMAIL_HOST
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: 587
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
+
+  - type: pserv
+    name: fitblendz-postgres
+    env: postgresql
+    plan: free
+    ipAllowList: []

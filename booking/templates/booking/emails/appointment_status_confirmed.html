@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Confirmed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #28a745;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #28a745;
+            margin: 0;
+            font-size: 28px;
+        }
+        .appointment-details {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .detail-value {
+            color: #212529;
+        }
+        .status-badge {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Appointment Confirmed!</h1>
+        </div>
+        
+        <p>Hi <strong>{{ appointment.name }}</strong>,</p>
+        
+        <p>Great news! Your appointment has been confirmed. We're looking forward to seeing you!</p>
+        
+        <div class="appointment-details">
+            <div class="detail-row">
+                <span class="detail-label">Service:</span>
+                <span class="detail-value">{{ appointment.service.name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Date:</span>
+                <span class="detail-value">{{ appointment.date|date:"l, F j, Y" }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Time:</span>
+                <span class="detail-value">{{ formatted_time }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Duration:</span>
+                <span class="detail-value">{{ appointment.get_duration_display }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Price:</span>
+                <span class="detail-value">₹{{ appointment.service.price }}</span>
+            </div>
+        </div>
+        
+        <div class="status-badge">
+            Status: Confirmed ✅
+        </div>
+        
+        <p><strong>Important Reminders:</strong></p>
+        <ul>
+            <li>Please arrive 10 minutes before your scheduled time</li>
+            <li>Bring any specific styling preferences or reference images</li>
+            <li>If you need to reschedule, please contact us at least 24 hours in advance</li>
+        </ul>
+        
+        <div style="text-align: center;">
+            <a href="{{ appointment.get_status_url }}" class="cta-button">View Appointment Details</a>
+        </div>
+        
+        <p>If you have any questions or need to make changes, please don't hesitate to contact us.</p>
+        
+        <div class="footer">
+            <p><strong>Fitblendz</strong><br>
+            Professional Barber Services<br>
+            📧 bjot404@gmail.com<br>
+            📱 +91 6239514954</p>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,44 @@
+Appointment Completed!
+
+Hi {{ appointment.name }},
+
+Great news! Your appointment has been completed successfully. We hope you're happy with your new look!
+
+APPOINTMENT DETAILS:
+===================
+Service: {{ appointment.service.name }}
+Date: {{ appointment.date|date:"l, F j, Y" }}
+Time: {{ formatted_time }}
+Duration: {{ appointment.get_duration_display }}
+Status: Completed ✨
+
+HOW WAS YOUR EXPERIENCE?
+========================
+We'd love to hear about your experience with us! Your feedback helps us improve our services.
+
+Share your thoughts:
+• How satisfied are you with the service?
+• Would you recommend us to friends and family?
+• Any suggestions for improvement?
+
+Send feedback to: bjot404@gmail.com
+
+NEXT STEPS:
+===========
+• Book your next appointment to maintain your style
+• Follow us on social media for styling tips and updates
+• Refer friends and family - we appreciate your support!
+
+Book your next appointment at: {% url 'booking:booking_page' %}
+
+Thank you for choosing Fitblendz! We look forward to seeing you again.
+
+Best regards,
+FitBlendz Team
+
+---
+Fitblendz
+Professional Barber Services
+📧 bjot404@gmail.com
+📱 +91 6239514954
+

@@ -1,0 +1,402 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: whitesmoke;
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile-first responsive design */
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    padding-top: 80px;
+}
+
+/* LEFT SIDE: PRICING */
+.pricing-section {
+    flex: 1;
+    min-width: 0;
+    background: linear-gradient(135deg, #ffffff, #f9f4e6);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pricing-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.pricing-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 0px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    position: relative;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.pricing-sub-title::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: black;
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+.pricing-sub-title{
+  text-align:center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.pricing-list {
+    list-style: none;
+    padding: 0;
+}
+
+.pricing-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s ease, transform 0.2s ease;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.pricing-list li:hover {
+    background: rgba(212, 175, 55, 0.08);
+    transform: translateX(5px);
+}
+
+.pricing-list li span:first-child {
+    flex: 1;
+    min-width: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.price {
+    font-weight: bold;
+    color: #d4af37;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.pricing-list li:hover .price {
+    color: #ffda75;
+}
+
+.business-hours {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 2px solid #c59d5f;
+}
+
+.business-hours h3 {
+    color: #c59d5f;
+}
+
+.business-hours ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+.business-hours li {
+    color: #555;
+    padding: 5px 0;
+}
+
+/* RIGHT SIDE: FORM */
+.form-section {
+    flex: 1;
+    min-width: 0;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.form-title {
+    text-align: left;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 0px;
+    font-family: 'Poppins', sans-serif;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.form-sub-title{
+   text-align: left;
+   font-size: 16px;
+   color: black;
+   margin-bottom: 20px;
+   font-family: 'Poppins', sans-serif;
+   word-wrap: break-word;
+   overflow-wrap: break-word;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 6px;
+    font-family: 'Poppins', sans-serif;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    margin-top: 3px;
+    border-radius: 8px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease-in-out;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #d4af37;
+    outline: none;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    max-height: 200px;
+}
+
+.btn-book {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background:#282828;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.btn-book:hover {
+    background: #525252;
+    transform: translateY(-2px);
+}
+
+/* Appointment Status Styles */
+.appointment-status {
+    background: #e3f2fd;
+    color: #1565c0;
+    border: 2px solid #bbdefb;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.appointment-status.confirmed {
+    background: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.appointment-status.denied {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.appointment-status.pending {
+    background: #fff3cd;
+    color: #856404;
+    border-color: #ffeaa7;
+}
+
+/* Tablet and Desktop Styles */
+@media (min-width: 768px) {
+    .booking-container {
+        flex-direction: row;
+        gap: 40px;
+        padding: 60px;
+    }
+    
+    .pricing-section, .form-section {
+        min-width: 300px;
+        padding: 30px;
+    }
+    
+    .pricing-title, .form-title {
+        font-size: 28px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+    }
+}
+
+/* Mobile Styles */
+/* /* @media (max-width: 767px) {
+    .booking-container {
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .pricing-section, .form-section {
+        padding: 20px;
+    }
+    
+    .pricing-title, .form-title {
+        font-size: 24px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+        padding: 10px 12px;
+    }
+    
+    .btn-book {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    .appointment-status {
+        font-size: 1rem;
+        padding: 0.8rem;
+        margin: 0.8rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-container {
+        padding: 15px;
+    }
+    
+    .pricing-section, .form-section {
+        padding: 15px;
+    }
+    
+    .pricing-title, .form-title {
+        font-size: 20px;
+    }
+    
+    .pricing-list li {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+    
+    .btn-book {
+        padding: 12px;
+        font-size: 16px;
+    }
+    
+    .appointment-status {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+}
+
+/* Extra small screens */
+/* @media (max-width: 360px) {
+    .booking-container {
+        padding: 10px;
+    }
+    
+    .pricing-section, .form-section {
+        padding: 12px;
+    }
+    
+    .pricing-title, .form-title {
+        font-size: 18px;
+    }
+    
+    .pricing-list li {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 8px 10px;
+        font-size: 16px;
+    }
+    
+    .btn-book {
+        padding: 10px;
+        font-size: 14px;
+    }
+} 
