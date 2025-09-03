@@ -18,19 +18,12 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-improved-secret-key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,9260aacdbb4f.ngrok-free.app').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
-# CSRF Trusted Origins for mobile and different ports
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:80',
-    'http://127.0.0.1:80',
-    'https://localhost',
-    'https://127.0.0.1',
-]
+# CSRF Trusted Origins for production deployment
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 
+    'http://localhost:8000,http://127.0.0.1:8000,http://localhost:3000,http://127.0.0.1:3000,http://localhost:80,http://127.0.0.1:80,https://localhost,https://127.0.0.1,https://fitblendz-pro.onrender.com,https://*.onrender.com'
+).split(',')
 
 # Application definition
 INSTALLED_APPS = [
