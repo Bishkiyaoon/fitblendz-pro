@@ -68,7 +68,46 @@ def booking_page(request):
     try:
         if request.method == "GET":
             appt_id = request.GET.get("appt")
-            services = Service.objects.filter(is_active=True).order_by('name')
+            
+            # Get services with error handling
+            try:
+                services = Service.objects.filter(is_active=True).order_by('name')
+                logger.info(f"Found {services.count()} active services")
+                
+                # If no services found, try to create them
+                if services.count() == 0:
+                    logger.warning("No services found, attempting to create default services")
+                    from django.core.management import call_command
+                    try:
+                        call_command('populate_services')
+                        services = Service.objects.filter(is_active=True).order_by('name')
+                        logger.info(f"Created services, now found {services.count()} active services")
+                    except Exception as create_error:
+                        logger.error(f"Error creating services: {create_error}")
+                        services = []
+                        
+            except Exception as e:
+                logger.error(f"Error fetching services: {e}")
+                services = []
+            
+            # Get working hours with error handling
+            try:
+                from .models import WorkingHours
+                working_hours = WorkingHours.objects.all()
+                logger.info(f"Found {working_hours.count()} working hours records")
+                
+                # If no working hours found, try to create them
+                if working_hours.count() == 0:
+                    logger.warning("No working hours found, attempting to create default working hours")
+                    try:
+                        call_command('populate_working_hours')
+                        working_hours = WorkingHours.objects.all()
+                        logger.info(f"Created working hours, now found {working_hours.count()} records")
+                    except Exception as create_error:
+                        logger.error(f"Error creating working hours: {create_error}")
+                        
+            except Exception as e:
+                logger.error(f"Error fetching working hours: {e}")
             
             context = {
                 'services': services,
@@ -83,6 +122,8 @@ def booking_page(request):
             
     except Exception as e:
         logger.error(f"Error in booking_page view: {e}")
+        import traceback
+        logger.error(f"Full traceback: {traceback.format_exc()}")
         return JsonResponse({
             'success': False,
             'error': 'An error occurred while processing your request. Please try again.'
