@@ -67,33 +67,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'fitblendz_pro.wsgi.application'
 
 # Database Configuration
-# Use PostgreSQL in production, SQLite for development
-# Database configuration
-if DEBUG or not os.getenv('DB_HOST'):
-    # Development database (SQLite) - also used if no DB_HOST is set
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+# Use SQLite for deployment (can be changed to PostgreSQL later)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    # Production database (PostgreSQL) - only if DB_HOST is set
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME', 'fitblendz_pro'),
-            'USER': os.getenv('DB_USER', 'postgres'),
-            'PASSWORD': os.getenv('DB_PASSWORD', ''),
-            'HOST': os.getenv('DB_HOST', 'localhost'),
-            'PORT': os.getenv('DB_PORT', '5432'),
-            'OPTIONS': {
-                'connect_timeout': 10,
-                'options': '-c default_transaction_isolation=read committed'
-            },
-            'CONN_MAX_AGE': 600,  # Connection pooling
-        }
-    }
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
