@@ -15,15 +15,25 @@ services:
       - key: CSRF_TRUSTED_ORIGINS
         value: "https://fitblendz-pro.onrender.com,https://*.onrender.com"
       - key: DB_NAME
-        value: fitblendz_pro
+        fromDatabase:
+          name: fitblendz-postgres
+          property: database
       - key: DB_USER
-        value: fitblendz_user
+        fromDatabase:
+          name: fitblendz-postgres
+          property: user
       - key: DB_PASSWORD
-        generateValue: true
+        fromDatabase:
+          name: fitblendz-postgres
+          property: password
       - key: DB_HOST
-        value: dpg-xxxxxxxxx-a.oregon-postgres.render.com
+        fromDatabase:
+          name: fitblendz-postgres
+          property: host
       - key: DB_PORT
-        value: 5432
+        fromDatabase:
+          name: fitblendz-postgres
+          property: port
       - key: WHATSAPP_TOKEN
         sync: false
       - key: PHONE_NUMBER_ID
