@@ -14,26 +14,12 @@ services:
         value: "*"
       - key: CSRF_TRUSTED_ORIGINS
         value: "https://fitblendz-pro.onrender.com,https://*.onrender.com"
-      - key: DB_NAME
-        fromDatabase:
-          name: fitblendz-postgres
-          property: database
-      - key: DB_USER
-        fromDatabase:
-          name: fitblendz-postgres
-          property: user
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: fitblendz-postgres
-          property: password
-      - key: DB_HOST
-        fromDatabase:
-          name: fitblendz-postgres
-          property: host
-      - key: DB_PORT
-        fromDatabase:
-          name: fitblendz-postgres
-          property: port
+      - key: EMAIL_HOST
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: 587
+      - key: EMAIL_USE_TLS
+        value: True
       - key: WHATSAPP_TOKEN
         sync: false
       - key: PHONE_NUMBER_ID
@@ -42,18 +28,19 @@ services:
         sync: false
       - key: BARBER_WHATSAPP
         sync: false
-      - key: EMAIL_HOST
-        value: smtp.gmail.com
-      - key: EMAIL_PORT
-        value: 587
       - key: EMAIL_HOST_USER
         sync: false
       - key: EMAIL_HOST_PASSWORD
         sync: false
       - key: DEFAULT_FROM_EMAIL
         sync: false
-
-  - type: postgres
-    name: fitblendz-postgres
-    plan: free
-
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: 5432
