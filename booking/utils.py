@@ -287,13 +287,24 @@ def is_working_hours(date, time):
         # Get working hours for this day
         working_hours = WorkingHours.objects.filter(day=day_of_week).first()
         
-        if not working_hours or not working_hours.is_open:
+        logger.info(f"Checking working hours for day {day_of_week}, time {time}")
+        logger.info(f"Working hours found: {working_hours}")
+        
+        if not working_hours:
+            logger.warning(f"No working hours found for day {day_of_week}")
+            return False
+            
+        if not working_hours.is_open:
+            logger.warning(f"Shop is closed on day {day_of_week}")
             return False
         
         # Check if time is within working hours
         if working_hours.open_time and working_hours.close_time:
-            return working_hours.open_time <= time <= working_hours.close_time
+            is_within_hours = working_hours.open_time <= time <= working_hours.close_time
+            logger.info(f"Time {time} is within {working_hours.open_time} - {working_hours.close_time}: {is_within_hours}")
+            return is_within_hours
         
+        logger.warning(f"No open/close times set for day {day_of_week}")
         return False
         
     except Exception as e:
