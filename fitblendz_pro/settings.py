@@ -68,8 +68,9 @@ WSGI_APPLICATION = 'fitblendz_pro.wsgi.application'
 
 # Database Configuration
 # Use PostgreSQL in production, SQLite for development
-if DEBUG:
-    # Development database (SQLite)
+# Database configuration
+if DEBUG or not os.getenv('DB_HOST'):
+    # Development database (SQLite) - also used if no DB_HOST is set
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -77,7 +78,7 @@ if DEBUG:
         }
     }
 else:
-    # Production database (PostgreSQL)
+    # Production database (PostgreSQL) - only if DB_HOST is set
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',

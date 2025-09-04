@@ -3,7 +3,7 @@ services:
     name: fitblendz-pro
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python manage.py migrate
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
     startCommand: gunicorn fitblendz_pro.wsgi:application
     envVars:
       - key: DEBUG
@@ -21,26 +21,16 @@ services:
       - key: EMAIL_USE_TLS
         value: True
       - key: WHATSAPP_TOKEN
-        sync: false
+        value: "your_whatsapp_token_here"
       - key: PHONE_NUMBER_ID
-        sync: false
+        value: "your_phone_number_id_here"
       - key: WHATSAPP_VERIFY_TOKEN
-        sync: false
+        value: "fitblendz_whatsapp_verify_7c2f4b1e"
       - key: BARBER_WHATSAPP
-        sync: false
+        value: "+916239514954"
       - key: EMAIL_HOST_USER
-        sync: false
+        value: "bjot404@gmail.com"
       - key: EMAIL_HOST_PASSWORD
-        sync: false
+        value: "pane gfwn gggh nqkr"
       - key: DEFAULT_FROM_EMAIL
-        sync: false
-      - key: DB_NAME
-        sync: false
-      - key: DB_USER
-        sync: false
-      - key: DB_PASSWORD
-        sync: false
-      - key: DB_HOST
-        sync: false
-      - key: DB_PORT
-        value: 5432
+        value: "bjot404@gmail.com"
