@@ -701,16 +701,10 @@
     <div class="pricing-section">
         <h2 class="pricing-title">✂️ Our Services</h2>
       <p class="pricing-sub-title">Professional barbering services with attention to detail</p>
-      <!-- Debug info -->
-      <p style="font-size: 12px; color: #666;">Debug: Services count = {{ services|length }}</p>
         <ul class="pricing-list">
-            {% if services %}
-                {% for service in services %}
-                    <li><span>{{ service.name }}</span> <span class="price">₹{{ service.price }}</span></li>
-                {% endfor %}
-            {% else %}
-                <li><span>No services available</span> <span class="price">-</span></li>
-            {% endif %}
+            {% for service in services %}
+                <li><span>{{ service.name }}</span> <span class="price">₹{{ service.price }}</span></li>
+            {% endfor %}
         </ul>
         
            <div class="business-hours">
