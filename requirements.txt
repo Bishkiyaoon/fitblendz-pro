@@ -1,7 +1,7 @@
 Django==5.2.3
 python-dotenv==1.0.0
 requests==2.31.0
-Pillow==10.0.1
+Pillow==10.4.0
 django-crispy-forms==2.1
 crispy-bootstrap5==0.7
 django-widget-tweaks==1.5.0
@@ -17,9 +17,5 @@ django-extensions==3.2.3
 # Production server
 gunicorn==21.2.0
 
-# Caching (optional - for Redis in production)
-# redis==5.0.1
-# django-redis==5.4.0
-
-# Monitoring & Debugging
-django-debug-toolbar==4.2.0
+# Monitoring & Debugging (optional for production)
+# django-debug-toolbar==4.2.0
