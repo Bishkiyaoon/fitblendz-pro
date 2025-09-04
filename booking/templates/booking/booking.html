@@ -810,8 +810,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submitBtn');
     const today = new Date().toISOString().split('T')[0];
     
+    // Check if required elements exist
+    if (!form || !submitBtn) {
+        console.error('Required form elements not found');
+        return;
+    }
+    
     // Set minimum date to today
-    document.getElementById('date').min = today;
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+        dateInput.min = today;
+    }
     
     // Function to update time constraints based on selected date
     function updateTimeConstraints() {
@@ -868,7 +877,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Add event listener for date changes
-    document.getElementById('date').addEventListener('change', updateTimeConstraints);
+    const dateElement = document.getElementById('date');
+    if (dateElement) {
+        dateElement.addEventListener('change', updateTimeConstraints);
+    }
     
     // Fetch working hours and initialize time constraints
     fetchWorkingHours();
@@ -980,7 +992,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Phone number formatting
     const phoneInput = document.getElementById('phone');
-    phoneInput.addEventListener('input', function(e) {
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
         if (value.length > 0) {
             if (value.length <= 2) {
@@ -992,7 +1005,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         e.target.value = value;
-    });
+        });
+    }
 });
 
 // Appointment status polling
@@ -1363,20 +1377,22 @@ style.textContent = `
 document.head.appendChild(style);
 const selectElement = document.getElementById('service');
 
-selectElement.addEventListener('change', function () {
-  if (this.value === "") {
-    this.style.color = "#888"; // Placeholder color
-  } else {
-    this.style.color = "#000"; // Regular color
-  }
-});
+if (selectElement) {
+    selectElement.addEventListener('change', function () {
+        if (this.value === "") {
+            this.style.color = "#888"; // Placeholder color
+        } else {
+            this.style.color = "#000"; // Regular color
+        }
+    });
 
-// Set initial color
-window.addEventListener('load', () => {
-  if (selectElement.value === "") {
-    selectElement.style.color = "#888";
-  }
-});
+    // Set initial color
+    window.addEventListener('load', () => {
+        if (selectElement.value === "") {
+            selectElement.style.color = "#888";
+        }
+    });
+}
 
 {% comment %} const selectElement = document.getElementById('date');
 

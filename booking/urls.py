@@ -19,6 +19,7 @@ urlpatterns = [
     path('api/delete-appointment/<uuid:appointment_id>/', views.delete_appointment, name='delete_appointment'),
     path('api/update-appointment-status/<uuid:appointment_id>/', views.update_appointment_status, name='update_appointment_status'),
     path('api/available-times/', views.get_available_times, name='get_available_times'),
+    path('api/working-hours/', views.get_working_hours, name='get_working_hours'),
     
     # WhatsApp webhook
     path('webhook/', webhook_views.whatsapp_webhook, name='whatsapp_webhook'),
