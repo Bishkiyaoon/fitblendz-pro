@@ -53,9 +53,7 @@ services:
       - key: DEFAULT_FROM_EMAIL
         sync: false
 
-  - type: pserv
+  - type: postgres
     name: fitblendz-postgres
-    env: postgresql
     plan: free
-    ipAllowList: []
 
