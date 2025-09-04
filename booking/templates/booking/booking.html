@@ -903,16 +903,53 @@ document.addEventListener('DOMContentLoaded', function() {
             data[key] = value;
         }
         
+        // Get CSRF token
+        let csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+        console.log('CSRF token element:', csrfToken);
+        
+        if (!csrfToken) {
+            // Try to get CSRF token from cookies as fallback
+            const cookies = document.cookie.split(';');
+            console.log('All cookies:', document.cookie);
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'csrftoken') {
+                    csrfToken = { value: value };
+                    console.log('Found CSRF token in cookies:', value);
+                    break;
+                }
+            }
+        } else {
+            console.log('Found CSRF token in form:', csrfToken.value);
+        }
+        
+        if (!csrfToken) {
+            console.error('CSRF token not found');
+            alert('Security error: CSRF token not found. Please refresh the page and try again.');
+            return;
+        }
+        
         // Submit form via AJAX
         fetch('/book/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                'X-CSRFToken': csrfToken.value
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                if (response.status === 403) {
+                    throw new Error('Security error: CSRF token invalid. Please refresh the page and try again.');
+                } else if (response.status === 400) {
+                    throw new Error('Invalid data: Please check your form inputs and try again.');
+                } else {
+                    throw new Error(`Server error: ${response.status}. Please try again later.`);
+                }
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.success) {
                 // Show success message
@@ -1402,7 +1439,7 @@ selectElement.addEventListener('change', function () {
   } else {
     this.style.color = "#000"; // Regular color
   }
-}); {% endcomment %}
+});
 
 // Set initial color
 window.addEventListener('load', () => {
